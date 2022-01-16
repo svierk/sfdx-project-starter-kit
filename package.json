@@ -3,38 +3,46 @@
   "private": true,
   "version": "1.0.0",
   "description": "Salesforce App",
+  "author": {
+    "name": "Sebastiano Vierk",
+    "url": "https://github.com/svierk"
+  },
+  "license": "MIT",
   "scripts": {
-    "lint": "eslint **/{aura,lwc}/**",
+    "lint": "eslint **/lwc/**",
     "test": "npm run test:unit",
     "test:unit": "sfdx-lwc-jest",
     "test:unit:watch": "sfdx-lwc-jest --watch",
     "test:unit:debug": "sfdx-lwc-jest --debug",
     "test:unit:coverage": "sfdx-lwc-jest --coverage",
-    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\" --check",
     "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "postinstall": "husky install",
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "@lwc/eslint-plugin-lwc": "^1.0.1",
-    "@prettier/plugin-xml": "^0.13.1",
-    "@salesforce/eslint-config-lwc": "^2.0.0",
+    "@babel/core": "^7.16.7",
+    "@babel/eslint-parser": "^7.16.5",
+    "@lwc/eslint-plugin-lwc": "^1.1.1",
+    "@prettier/plugin-xml": "^1.2.0",
+    "@salesforce/eslint-config-lwc": "^3.2.1",
     "@salesforce/eslint-plugin-aura": "^2.0.0",
-    "@salesforce/eslint-plugin-lightning": "^0.1.1",
-    "@salesforce/sfdx-lwc-jest": "^0.13.0",
-    "eslint": "^7.29.0",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jest": "^24.3.6",
-    "husky": "^7.0.0",
-    "lint-staged": "^11.0.0",
-    "prettier": "^2.3.2",
-    "prettier-plugin-apex": "^1.10.1"
+    "@salesforce/eslint-plugin-lightning": "^1.0.0",
+    "@salesforce/sfdx-lwc-jest": "^1.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-compat": "^4.0.1",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^25.7.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
+    "prettier": "^2.5.1",
+    "prettier-plugin-apex": "^1.10.0"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
-      "prettier --write"
+      "prettier --write --check"
     ],
-    "**/{aura,lwc}/**": [
+    "**/lwc/**": [
       "eslint"
     ]
   }
