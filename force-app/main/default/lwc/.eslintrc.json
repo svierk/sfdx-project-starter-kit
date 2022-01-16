@@ -1,5 +1,12 @@
 {
-  "extends": ["@salesforce/eslint-config-lwc/recommended"],
+  "extends": ["@salesforce/eslint-config-lwc/recommended", "@salesforce/eslint-config-lwc/i18n"],
+  "plugins": ["@lwc/eslint-plugin-lwc"],
+  "rules": {
+    "@lwc/lwc/consistent-component-name": "error",
+    "@lwc/lwc/no-deprecated": "error",
+    "@lwc/lwc/valid-api": "error",
+    "@lwc/lwc/no-document-query": "error"
+  },
   "overrides": [
     {
       "files": ["*.test.js"],
