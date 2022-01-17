@@ -43,7 +43,8 @@
       "prettier --write --check"
     ],
     "**/lwc/**": [
-      "eslint"
+      "eslint",
+      "sfdx-lwc-jest"
     ]
   }
 }
