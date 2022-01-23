@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "eslint **/lwc/**",
+    "lint": "eslint **/{aura,lwc}/**",
     "test": "npm run test:unit",
     "test:unit": "sfdx-lwc-jest",
     "test:unit:watch": "sfdx-lwc-jest --watch",
@@ -21,7 +21,7 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.7",
+    "@babel/core": "^7.16.10",
     "@babel/eslint-parser": "^7.16.5",
     "@lwc/eslint-plugin-lwc": "^1.1.1",
     "@prettier/plugin-xml": "^1.2.0",
@@ -42,8 +42,10 @@
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
       "prettier --write --check"
     ],
+    "**/{aura,lwc}/**": [
+      "eslint"
+    ],
     "**/lwc/**": [
-      "eslint",
       "sfdx-lwc-jest"
     ]
   }
