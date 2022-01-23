@@ -22,5 +22,6 @@
   "eslint.options": {
     "extensions": [".js", ".html"]
   },
-  "eslint.validate": ["javascript", "html"]
+  "eslint.validate": ["javascript", "html"],
+  "salesforcedx-vscode-core.retrieve-test-code-coverage": true
 }
