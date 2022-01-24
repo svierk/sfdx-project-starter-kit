@@ -29,13 +29,21 @@ The project includes client-side pre-commit git hooks using [husky](https://gith
 
 ## Prettier
 
-Run `npm run prettier` to check for _Prettier_ issues.
+Run `npm run prettier` to check all files for _Prettier_ issues.
 
 ## Linter
 
-Run `npm run lint` to check for _ESLint_ issues
+### Linting LWC and Aura
+
+Run `npm run lint` to check for _ESLint_ issues.
+
+### Linting Apex code
+
+Use the recommended extension [Apex PMD](https://github.com/ChuckJonas/vscode-apex-pmd) to check manually for Apex linting issues.
 
 ## Unit tests
+
+### Execute LWC unit tests
 
 Run
 
