@@ -12,7 +12,7 @@ To use this template, [Node](https://nodejs.org/en/) and the [Salesforce CLI](ht
 
 ## Getting started
 
-To get the template up and runnning, you need to open the repository with VS Code, install all the recommended extensions and run `npm install` to install all required dependencies.
+To get the template up and running, you need to clone the repository and open it with VS Code, install all the recommended extensions and run `npm install` to install all required dependencies.
 
 After that you need to authorize an org for which you want to develop. In VS Code this can be done by pressing **Command + Shift + P**, enter "sfdx", and select **SFDX: Authorize an Org**.
 
