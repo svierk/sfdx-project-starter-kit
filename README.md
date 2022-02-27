@@ -1,6 +1,6 @@
 # ☁️ Salesforce DX Project Starter Kit
 
-![GitHub](https://img.shields.io:/github/license/svierk/lwc-starter-kit)
+![GitHub License](https://img.shields.io:/github/license/svierk/lwc-starter-kit)
 ![GitHub CI](https://github.com/svierk/lwc-starter-kit/actions/workflows/ci.yaml/badge.svg)
 
 ## About the project

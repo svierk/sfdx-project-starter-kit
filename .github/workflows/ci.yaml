@@ -1,4 +1,4 @@
-name: Node.js CI
+name: CI
 
 on:
   push:
@@ -21,7 +21,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm run prettier
-      - run: npm run lint
-      - run: npm run test:unit:coverage
+      - name: npm clean-install
+        run: npm ci
+      - name: Check Prettier
+        run: npm run prettier
+      - name: Check ESLint
+        run: npm run lint
+      - name: LWC Unit Tests
+        run: npm run test:unit:coverage
