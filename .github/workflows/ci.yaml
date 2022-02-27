@@ -19,6 +19,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Run npm clean-install
