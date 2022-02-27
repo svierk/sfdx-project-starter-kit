@@ -2,6 +2,7 @@
 
 ![GitHub License](https://img.shields.io:/github/license/svierk/lwc-starter-kit)
 ![GitHub CI](https://github.com/svierk/lwc-starter-kit/actions/workflows/ci.yaml/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=svierk_lwc-starter-kit&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=svierk_lwc-starter-kit)
 
 ## About the project
 
