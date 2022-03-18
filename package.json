@@ -47,7 +47,7 @@
       "eslint"
     ],
     "**/lwc/**": [
-      "sfdx-lwc-jest"
+      "sfdx-lwc-jest -- --passWithNoTests"
     ]
   }
 }
