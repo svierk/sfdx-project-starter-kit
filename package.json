@@ -43,10 +43,10 @@
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
       "prettier --write --check"
     ],
-    "**/{aura,lwc}/**": [
+    "**/{aura,lwc}/**/*.{cmp,css,html,js}": [
       "eslint"
     ],
-    "**/lwc/**": [
+    "**/lwc/**/*.{css,html,js}": [
       "sfdx-lwc-jest -- --passWithNoTests"
     ]
   }
