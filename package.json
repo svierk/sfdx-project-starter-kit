@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "eslint **/{aura,lwc}/**/*.js",
+    "lint": "eslint **/lwc/**/*.js",
     "test": "npm run test:unit",
     "test:unit": "sfdx-lwc-jest",
     "test:unit:watch": "sfdx-lwc-jest --watch",
@@ -43,10 +43,8 @@
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
       "prettier --write --check"
     ],
-    "**/{aura,lwc}/**/*.js": [
-      "eslint"
-    ],
     "**/lwc/**/*.{css,html,js}": [
+      "eslint",
       "sfdx-lwc-jest -- --passWithNoTests"
     ]
   }
