@@ -8,20 +8,19 @@ describe('c-hello-world', () => {
     }
   });
 
-  it('displays greeting', () => {
+  it('is accessible and displays greeting', async () => {
     // given
     const element = createElement('c-hello-world', {
       is: HelloWorld
     });
-    document.body.appendChild(element);
-
-    // when
     element.name = 'World';
 
+    // when
+    document.body.appendChild(element);
+
     // then
-    return Promise.resolve().then(() => {
-      const div = element.shadowRoot.querySelector('div');
-      expect(div.textContent).toBe('Hello, World!');
-    });
+    const div = element.shadowRoot.querySelector('div');
+    expect(div.textContent).toBe('Hello, World!');
+    await expect(element).toBeAccessible();
   });
 });
