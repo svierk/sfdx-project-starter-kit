@@ -11,7 +11,7 @@ The repository provides a template for Salesforce DX projects which includes an 
 
 ## Prerequisites
 
-To use this template, [Node](https://nodejs.org/en/) and the [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) should already be installed.
+To use this template, the [Node](https://nodejs.org/en/) version specified in the *package.json* and the latest version of the [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) should already be installed.
 
 ## Getting started
 
