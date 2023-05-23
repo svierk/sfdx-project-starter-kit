@@ -15,7 +15,7 @@ To use this template, the [Node](https://nodejs.org/en/) version specified in th
 
 ## Getting started
 
-To get the template up and running, you need to clone the repository and open it with VS Code, install all the recommended extensions and run the following command to install all required dependencies.: 
+To get the template up and running, you need to clone the repository and open it with VS Code, install all the recommended extensions and run the following command to install all required dependencies: 
 
 ```
 npm install
