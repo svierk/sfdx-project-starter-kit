@@ -15,7 +15,11 @@ To use this template, the [Node](https://nodejs.org/en/) version specified in th
 
 ## Getting started
 
-To get the template up and running, you need to clone the repository and open it with VS Code, install all the recommended extensions and run `npm install` to install all required dependencies.
+To get the template up and running, you need to clone the repository and open it with VS Code, install all the recommended extensions and run the following command to install all required dependencies.: 
+
+```
+npm install
+``` 
 
 After that you need to authorize an org for which you want to develop. In VS Code this can be done by pressing **Command + Shift + P**, enter "sfdx", and select **SFDX: Authorize an Org**.
 
@@ -33,6 +37,9 @@ Alternatively you can also create all components from the command line, e.g.:
 
 ```
 cd force-app/main/default/lwc
+```
+
+```
 sfdx force:lightning:component:create --type lwc -n helloWorld -d force-app/main/default/lwc
 ```
 
@@ -44,13 +51,21 @@ The project includes client-side pre-commit git hooks using [husky](https://gith
 
 ### Prettier
 
-Run `npm run prettier` to check all files for _Prettier_ issues.
+Run _Prettier_ to check all files for formatting issues:
+
+```
+npm run prettier
+```
 
 ### Linter
 
 #### Linting LWC and Aura
 
-Run `npm run lint` to check for _ESLint_ issues.
+Run _ESLint_ to check for linting issues:
+
+```
+npm run lint
+```
 
 #### Linting Apex code
 
@@ -60,11 +75,22 @@ Use the recommended extension [Apex PMD](https://github.com/ChuckJonas/vscode-ap
 
 ### Execute LWC unit tests with Jest
 
-Run
+To execute all unit tests only once run:
 
-- `npm run test:unit` to execute all unit tests only once
-- `npm run test:unit:watch` to execute all unit tests in watch mode for development
-- `npm run test:unit:coverage` to execute all unit tests with generated code coverage
+```
+npm run test:unit
+``` 
+
+To execute all unit tests in watch mode for development run:
+
+```
+npm run test:unit:watch
+``` 
+
+To execute all unit tests with generated code coverage run:
+```
+npm run test:unit:coverage 
+```
 
 ## Local development
 
@@ -78,7 +104,11 @@ The local development server and its configuration are provided by a Salesforce 
 sfdx plugins:install @salesforce/lwc-dev-server
 ```
 
-Run `npm run server:lwc` to start the server on http://localhost:3333 and access all components of the project.
+To start the server on http://localhost:3333 and access all components of the project run:
+
+```
+npm run server:lwc
+```
 
 ## Debugging
 
