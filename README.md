@@ -11,15 +11,15 @@ The repository provides a template for Salesforce DX projects which includes an 
 
 ## Prerequisites
 
-To use this template, the [Node](https://nodejs.org/en/) version specified in the *package.json* and the latest version of the [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) should already be installed.
+To use this template, the [Node](https://nodejs.org/en/) version specified in the _package.json_ and the latest version of the [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) should already be installed.
 
 ## Getting started
 
-To get the template up and running, you need to clone the repository and open it with VS Code, install all the recommended extensions and run the following command to install all required dependencies: 
+To get the template up and running, you need to clone the repository and open it with VS Code, install all the recommended extensions and run the following command to install all required dependencies:
 
 ```
 npm install
-``` 
+```
 
 After that you need to authorize an org for which you want to develop. In VS Code this can be done by pressing **Command + Shift + P**, enter "sfdx", and select **SFDX: Authorize an Org**.
 
@@ -79,17 +79,18 @@ To execute all unit tests only once run:
 
 ```
 npm run test:unit
-``` 
+```
 
 To execute all unit tests in watch mode for development run:
 
 ```
 npm run test:unit:watch
-``` 
+```
 
 To execute all unit tests with generated code coverage run:
+
 ```
-npm run test:unit:coverage 
+npm run test:unit:coverage
 ```
 
 ## Local development
