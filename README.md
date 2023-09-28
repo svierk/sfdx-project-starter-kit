@@ -26,7 +26,7 @@ After that you need to authorize an org for which you want to develop. In VS Cod
 Alternatively you can also run the following command from the command line:
 
 ```
-sfdx force:auth:web:login
+sf org login web
 ```
 
 ## Code scaffolding
@@ -40,7 +40,7 @@ cd force-app/main/default/lwc
 ```
 
 ```
-sfdx force:lightning:component:create --type lwc -n helloWorld -d force-app/main/default/lwc
+sf lightning generate component --type lwc -n helloWorld -d force-app/main/default/lwc
 ```
 
 ## Code quality
@@ -102,7 +102,7 @@ Lightning Web Components can be developed locally without the need to push them 
 The local development server and its configuration are provided by a Salesforce CLI plugin that can be installed as follows:
 
 ```
-sfdx plugins:install @salesforce/lwc-dev-server
+sf plugins install @salesforce/lwc-dev-server
 ```
 
 To start the server on http://localhost:3333 and access all components of the project run:
