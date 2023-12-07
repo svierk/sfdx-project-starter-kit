@@ -5,7 +5,7 @@
       "default": true
     }
   ],
-  "name": "lwc-starter-kit",
+  "name": "sfdx-project-starter-kit",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "59.0"
