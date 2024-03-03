@@ -1,6 +1,6 @@
 # ☁️ Salesforce DX Project Starter Kit
 
-![GitHub CI](https://github.com/svierk/sfdx-project-starter-kit/actions/workflows/ci.yaml/badge.svg)
+![GitHub CI](https://github.com/svierk/sfdx-project-starter-kit/actions/workflows/ci.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=svierk_sfdx-project-starter-kit&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=svierk_sfdx-project-starter-kit)
 [![codecov](https://codecov.io/gh/svierk/sfdx-project-starter-kit/branch/main/graph/badge.svg?token=J09EQWRADE)](https://codecov.io/gh/svierk/sfdx-project-starter-kit)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsvierk%2Fsfdx-project-starter-kit.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsvierk%2Fsfdx-project-starter-kit?ref=badge_shield)
