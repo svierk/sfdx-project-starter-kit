@@ -33,5 +33,5 @@ runs:
         for i in ${{ join( fromJSON(inputs.plugins), ' ') }}
         do
           echo "Installing plugin $i..."
-          sf plugins install $i
+          echo y | sf plugins install $i
         done
