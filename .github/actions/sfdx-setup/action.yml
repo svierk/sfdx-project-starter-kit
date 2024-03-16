@@ -2,8 +2,11 @@ name: 'SFDX Setup'
 description: 'Salesforce setup action for installing the CLI and related plugins.'
 
 inputs:
+  plugins:
+    description: Specify SF CLI plugins to be installed, e.g. "['@salesforce/lwc-dev-server','sfdx-git-delta']".
+    required: false
   version:
-    description: Specify SF CLI version to be installed, for example "2.32.8".
+    description: Specify SF CLI version to be installed, e.g. "2.32.8".
     required: false
 
 runs:
@@ -13,7 +16,7 @@ runs:
       shell: bash
       run: |
         if [[ -z "${{ inputs.version }}" ]]; then
-          echo "Version was not specified, installing latest available SF CLI version."
+          echo "No version specified, latest SF CLI version is installed."
           npm i -g @salesforce/cli
         else
           echo "Installing SF CLI with version ${{ inputs.version }}."
@@ -21,3 +24,13 @@ runs:
         fi
 
         sf version
+    - name: Install Plugins
+      if: ${{ inputs.plugins }}
+      shell: bash
+      run: |
+        echo "Installing SF CLI plugins ${{ inputs.plugins }}."
+
+        for i in ${{ fromJson(inputs.plugins) }}
+        do
+          echo "Installing plugin $i"
+        done

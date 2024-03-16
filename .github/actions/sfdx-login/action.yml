@@ -1,5 +1,5 @@
 name: 'SFDX Login'
-description: 'Salesforce login action that uses a Salesforce DX (SFDX) URL for authorization.'
+description: 'Salesforce login action that uses a Salesforce DX (SFDX) authorization URL.'
 
 inputs:
   sfdx-url:
