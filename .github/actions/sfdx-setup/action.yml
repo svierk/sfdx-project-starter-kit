@@ -16,10 +16,10 @@ runs:
       shell: bash
       run: |
         if [[ -z "${{ inputs.version }}" ]]; then
-          echo "No version specified, latest SF CLI version is installed."
+          echo "No version specified, latest SF CLI version is installed..."
           npm i -g @salesforce/cli
         else
-          echo "Installing SF CLI with version ${{ inputs.version }}."
+          echo "Installing SF CLI with version ${{ inputs.version }}..."
           npm i -g @salesforce/cli@${{ inputs.version }}
         fi
 
@@ -28,12 +28,10 @@ runs:
       if: ${{ inputs.plugins }}
       shell: bash
       run: |
-        echo "Installing SF CLI plugins ${{ inputs.plugins }}."
-
-        echo ${{ fromJSON(inputs.plugins) }}
-        echo ${{ join( fromJSON(inputs.plugins), ' ') }}
+        echo "Installing SF CLI plugins: ${{ join( fromJSON(inputs.plugins), ', ') }}"
 
         for i in ${{ join( fromJSON(inputs.plugins), ' ') }}
         do
-          echo "Installing plugin $i"
+          echo "Installing plugin $i..."
+          sf plugins install $i
         done
