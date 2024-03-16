@@ -1,11 +1,23 @@
 name: 'SFDX Setup'
 description: 'Salesforce setup action for installing the CLI and related plugins.'
 
+inputs:
+  version:
+    description: Specify SF CLI version to be installed, for example "2.32.8".
+    required: false
+
 runs:
   using: composite
   steps:
     - name: Install SF CLI
       shell: bash
       run: |
-        npm i -g @salesforce/cli
+        if [[ -z "${{ inputs.version }}" ]]; then
+          echo "Version was not specified, installing latest SF CLI version."
+          npm i -g @salesforce/cli
+        else
+          echo "Installing SF CLI with version ${{ inputs.version }}."
+          npm i -g @salesforce/cli@${{ inputs.version }}
+        fi
+
         sf version
