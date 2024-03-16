@@ -28,7 +28,7 @@ jobs:
       - name: Install SF CLI
         uses: ./.github/actions/sfdx-setup
         with:
-          plugins: "['sfdx-git-delta', '@salesforce/lwc-dev-server']"
+          plugins: "['sfdx-git-delta', '@salesforce/plugin-packaging', '@salesforce/lwc-dev-server']"
       - name: Salesforce Org Login
         uses: ./.github/actions/sfdx-login
         with:
