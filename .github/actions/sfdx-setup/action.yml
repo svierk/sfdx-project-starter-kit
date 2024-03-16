@@ -13,7 +13,7 @@ runs:
       shell: bash
       run: |
         if [[ -z "${{ inputs.version }}" ]]; then
-          echo "Version was not specified, installing latest SF CLI version."
+          echo "Version was not specified, installing latest available SF CLI version."
           npm i -g @salesforce/cli
         else
           echo "Installing SF CLI with version ${{ inputs.version }}."

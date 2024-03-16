@@ -27,6 +27,8 @@ jobs:
         run: npm run test:unit:coverage
       - name: Install SF CLI
         uses: ./.github/actions/sfdx-setup
+        with:
+          version: 2.30.1
       - name: Salesforce Org Login
         uses: ./.github/actions/sfdx-login
         with:
