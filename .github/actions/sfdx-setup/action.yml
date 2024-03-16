@@ -1,0 +1,11 @@
+name: 'SFDX Setup'
+description: 'Salesforce setup action for installing the CLI and related plugins.'
+
+runs:
+  using: composite
+  steps:
+    - name: Install SF CLI
+      shell: bash
+      run: |
+        npm i -g @salesforce/cli
+        sf version
