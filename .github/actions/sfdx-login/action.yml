@@ -15,4 +15,6 @@ runs:
   steps:
     - name: Login
       shell: bash
-      run: sf org login sfdx-url --set-default --sfdx-url-file <(echo "${{ inputs.sfdx-url }}")
+      run: |
+        echo ${{ inputs.sfdx-url }} > authfile.json
+        sf org login sfdx-url --set-default --sfdx-url-file authfile.json
