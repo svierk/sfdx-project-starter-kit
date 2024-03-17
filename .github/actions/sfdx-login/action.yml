@@ -16,6 +16,5 @@ runs:
     - name: Login
       shell: bash
       run: |
-        echo ${{ fromJSON(inputs.sfdx-url) }} > authFile.json
-        jq . authFile.json
+        echo ${{ inputs.sfdx-url }} | base64 --decode | jq > authFile.json
         sf org login sfdx-url --set-default --sfdx-url-file authFile.json
