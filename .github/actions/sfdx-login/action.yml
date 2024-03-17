@@ -17,4 +17,5 @@ runs:
       shell: bash
       run: |
         echo ${{ fromJSON(inputs.sfdx-url) }} > authFile.json
+        jq . authFile.json
         sf org login sfdx-url --set-default --sfdx-url-file authFile.json
