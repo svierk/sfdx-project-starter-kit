@@ -1,0 +1,36 @@
+name: 'SFDX Data Import'
+description: 'Salesforce import action for uploading data either based on CSV (Bulk API 2.0) or JSON (sObject Tree) format.'
+
+inputs:
+  file-path:
+    description: Path to CSV or JSON file that contains the data to be uploaded.
+    required: true
+  object-type:
+    description: >
+      API name of the Salesforce object, either standard or custom, that you want to update or delete records from.
+      Only required for CSV file based upload using Bulk API 2.0.
+    required: false
+  external-id:
+    description: >
+      Name of the external ID field, or the Id field.
+      Only required for CSV file based upload using Bulk API 2.0.
+    required: false
+    default: Id
+
+runs:
+  using: composite
+  steps:
+    - name: Login
+      shell: bash
+      run: |
+        filepath=${{ inputs.file-path }}
+        filename_with_ext=$(basename "$filepath")
+        extension="${filename_with_ext##*.}"
+
+        if [[ "$extension" == "csv" ]] && [[ -n "${{ inputs.object-type }}" ]] && [[ -n "${{ inputs.external-id }}" ]]; then
+          sf data upsert bulk --sobject ${{ inputs.object-type }} --file ${{ inputs.file-path }} --external-id ${{ inputs.external-id }}
+        fi
+
+        if [[ "$extension" == "json" ]]; then
+          sf data import tree --files ${{ inputs.file-path }}
+        fi

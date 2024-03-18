@@ -4,7 +4,7 @@ description: 'Salesforce login action that uses a Salesforce DX (SFDX) authoriza
 inputs:
   sfdx-url:
     description: >
-      Authorize an org using a Salesforce DX (SFDX) authorization URL.
+      Authorize an org using a Base64 encoded Salesforce DX (SFDX) authorization URL.
       The SFDX authorization URL must have the format "force://<clientId>:<clientSecret>:<refreshToken>@<instanceUrl>". 
       NOTE: The SFDX authorization URL uses the "force" protocol, and not "http" or "https". 
       Also, the "instanceUrl" inside the SFDX authorization URL doesn't include the protocol ("https://").
