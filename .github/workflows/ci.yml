@@ -26,7 +26,7 @@ jobs:
       - name: LWC Unit Tests
         run: npm run test:unit:coverage
       - name: Install SF CLI
-        uses: ./.github/actions/sfdx-setup
+        uses: svierk/sfdx-cli-setup@main
       - name: Salesforce Org Login
         uses: svierk/sfdx-login@main
         with:
