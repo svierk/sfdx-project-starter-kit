@@ -32,15 +32,15 @@ runs:
           --json
         )
 
-        if[[ "${{ inputs.set-default-dev-hub }}" == "true" ]]; then
+        if [[ "${{ inputs.set-default-dev-hub }}" == "true" ]]; then
           args+=(--set-default-dev-hub)
         fi
 
-        if[[ "${{ inputs.set-default }}" == "true" ]]; then
+        if [[ "${{ inputs.set-default }}" == "true" ]]; then
           args+=(--set-default)
         fi
 
-        if[[ -n "${{ inputs.alias }}" ]]; then
+        if [[ -n "${{ inputs.alias }}" ]]; then
           args+=(--alias "${{ inputs.alias }}")
         fi
 
