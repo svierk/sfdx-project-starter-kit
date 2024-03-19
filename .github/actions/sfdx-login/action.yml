@@ -28,8 +28,7 @@ runs:
       shell: bash
       run: |
         args=(
-          --sfdx-url-file "authFile.json" 
-          --json
+          --sfdx-url-file "authFile.json"
         )
 
         if [[ "${{ inputs.set-default-dev-hub }}" == "true" ]]; then
@@ -45,5 +44,4 @@ runs:
         fi
 
         echo ${{ inputs.sfdx-url }} | base64 --decode | jq > authFile.json
-        echo sf org login sfdx-url "${args[@]}"
-      # sf org login sfdx-url --set-default --sfdx-url-file authFile.json
+        sf org login sfdx-url "${args[@]}"
