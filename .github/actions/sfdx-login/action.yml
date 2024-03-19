@@ -9,6 +9,17 @@ inputs:
       NOTE: The SFDX authorization URL uses the "force" protocol, and not "http" or "https". 
       Also, the "instanceUrl" inside the SFDX authorization URL doesn't include the protocol ("https://").
     required: true
+  set-default-dev-hub:
+    description: Set the authenticated org as the default Dev Hub.
+    required: false
+    default: 'false'
+  set-default:
+    description: Set the authenticated org as the default that all org-related commands run against.
+    required: false
+    default: 'false'
+  alias:
+    description: Alias for the org.
+    required: false
 
 runs:
   using: composite
@@ -16,5 +27,23 @@ runs:
     - name: Login
       shell: bash
       run: |
+        args=(
+          --sfdx-url-file "authFile.json" 
+          --json
+        )
+
+        if[[ "${{ inputs.set-default-dev-hub }}" == "true" ]]; then
+          args+=(--set-default-dev-hub)
+        fi
+
+        if[[ "${{ inputs.set-default }}" == "true" ]]; then
+          args+=(--set-default)
+        fi
+
+        if[[ -n "${{ inputs.alias }}" ]]; then
+          args+=(--alias "${{ inputs.alias }}")
+        fi
+
         echo ${{ inputs.sfdx-url }} | base64 --decode | jq > authFile.json
-        sf org login sfdx-url --set-default --sfdx-url-file authFile.json
+        sf org login sfdx-url "${args[@]}"
+      # sf org login sfdx-url --set-default --sfdx-url-file authFile.json

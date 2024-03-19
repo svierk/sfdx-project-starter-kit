@@ -28,9 +28,11 @@ jobs:
       - name: Install SF CLI
         uses: svierk/sfdx-cli-setup@main
       - name: Salesforce Org Login
-        uses: svierk/sfdx-login@main
+        uses: ./.github/actions/sfdx-login
         with:
           sfdx-url: ${{ secrets.SFDX_AUTH_URL }}
+          set-default: true
+          alias: some-org
       - name: CSV Data Import
         uses: svierk/sfdx-data-import@main
         with:
