@@ -45,5 +45,5 @@ runs:
         fi
 
         echo ${{ inputs.sfdx-url }} | base64 --decode | jq > authFile.json
-        sf org login sfdx-url "${args[@]}"
+        echo sf org login sfdx-url "${args[@]}"
       # sf org login sfdx-url --set-default --sfdx-url-file authFile.json
