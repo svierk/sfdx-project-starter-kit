@@ -5,16 +5,14 @@
         "type": "Contact",
         "referenceId": "ContactRef1"
       },
-      "LastName": "JSON IMPORT TEST 1",
-      "AccountId": "@AccountRef1"
+      "LastName": "JSON IMPORT TEST 1"
     },
     {
       "attributes": {
         "type": "Contact",
         "referenceId": "ContactRef2"
       },
-      "LastName": "JSON IMPORT TEST 2",
-      "AccountId": "@AccountRef2"
+      "LastName": "JSON IMPORT TEST 2"
     }
   ]
 }

@@ -3,7 +3,10 @@ description: 'Salesforce import action for uploading data either based on CSV (B
 
 inputs:
   file-path:
-    description: Path to CSV or JSON file that contains the data to be uploaded.
+    description: >
+      Path to CSV or JSON files that contains the data to be uploaded.
+      CSV (Bulk API 2.0) only supports a single file.
+      JSON (sObject Tree) supports one or multiple files, comma-separated and in-order that contain the records.
     required: true
   object-type:
     description: >
@@ -16,6 +19,12 @@ inputs:
       Only required for CSV file based upload using Bulk API 2.0.
     required: false
     default: Id
+  target-org:
+    description: Username or alias of the target org. Not required if default org is already set.
+    required: false
+  api-version:
+    description: Override the api version used for api requests made by this action.
+    required: false
 
 runs:
   using: composite
@@ -26,11 +35,22 @@ runs:
         filepath=${{ inputs.file-path }}
         filename_with_ext=$(basename "$filepath")
         extension="${filename_with_ext##*.}"
+        args=()
+
+        if [[ -n "${{ inputs.target-org }}" ]]; then
+          args+=(--target-org "${{ inputs.target-org }}")
+        fi
+
+        if [[ -n "${{ inputs.api-version }}" ]]; then
+          args+=(--api-version "${{ inputs.api-version }}")
+        fi
 
         if [[ "$extension" == "csv" ]] && [[ -n "${{ inputs.object-type }}" ]] && [[ -n "${{ inputs.external-id }}" ]]; then
-          sf data upsert bulk --sobject ${{ inputs.object-type }} --file ${{ inputs.file-path }} --external-id ${{ inputs.external-id }}
+          args+=(--sobject ${{ inputs.object-type }})
+          args+=(--external-id ${{ inputs.external-id }})
+          sf data upsert bulk --file ${{ inputs.file-path }} "${args[@]}"
         fi
 
         if [[ "$extension" == "json" ]]; then
-          sf data import tree --files ${{ inputs.file-path }}
+          sf data import tree --files ${{ inputs.file-path }} "${args[@]}"
         fi
