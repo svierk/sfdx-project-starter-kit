@@ -1,11 +1,11 @@
 name: validation
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
   validation:
@@ -45,7 +45,7 @@ jobs:
         uses: ./.github/actions/sfdx-data-import
         with:
           file-path: './data/accounts.json,./data/contacts.json'
-          api-version: 59.0
+          api-version: '59.0'
       - name: Deploy Metadata
         run: sf project deploy start
       - name: Apex Unit Tests
