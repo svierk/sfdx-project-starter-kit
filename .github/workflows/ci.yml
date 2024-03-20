@@ -42,7 +42,7 @@ jobs:
       - name: JSON Data Import
         uses: ./.github/actions/sfdx-data-import
         with:
-          file-path: './data/contacts.json,./data/accounts.json'
+          file-path: './data/accounts.json,./data/contacts.json'
       - name: Deploy Metadata
         run: sf project deploy start
       - name: Apex Unit Tests
