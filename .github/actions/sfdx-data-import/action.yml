@@ -48,9 +48,11 @@ runs:
         if [[ "$extension" == "csv" ]] && [[ -n "${{ inputs.object-type }}" ]] && [[ -n "${{ inputs.external-id }}" ]]; then
           args+=(--sobject ${{ inputs.object-type }})
           args+=(--external-id ${{ inputs.external-id }})
+          echo sf data upsert bulk --file ${{ inputs.file-path }} "${args[@]}"
           sf data upsert bulk --file ${{ inputs.file-path }} "${args[@]}"
         fi
 
         if [[ "$extension" == "json" ]]; then
+          echo sf data import tree --files ${{ inputs.file-path }} "${args[@]}"
           sf data import tree --files ${{ inputs.file-path }} "${args[@]}"
         fi
