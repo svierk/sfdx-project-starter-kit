@@ -1,10 +1,10 @@
 name: 'SFDX Data Import'
-description: 'Salesforce import action for uploading data either based on CSV (Bulk API 2.0) or JSON (sObject Tree) format.'
+description: 'Salesforce import action for uploading records based on CSV (Bulk API 2.0) or JSON (sObject Tree) format.'
 
 inputs:
   file-path:
     description: >
-      Path to CSV or JSON files that contains the data to be uploaded.
+      Path to CSV or JSON files that contain the data to be uploaded.
       CSV (Bulk API 2.0) only supports a single file.
       JSON (sObject Tree) supports one or multiple files, comma-separated and in-order that contain the records.
     required: true
@@ -23,13 +23,13 @@ inputs:
     description: Username or alias of the target org. Not required if default org is already set.
     required: false
   api-version:
-    description: Override the api version used for api requests made by this action, for example '59.0'
+    description: Override the api version used for api requests made by this action, for example '59.0'.
     required: false
 
 runs:
   using: composite
   steps:
-    - name: Login
+    - name: Data Import
       shell: bash
       run: |
         filepath=${{ inputs.file-path }}

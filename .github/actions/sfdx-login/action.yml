@@ -9,6 +9,12 @@ inputs:
       NOTE: The SFDX authorization URL uses the "force" protocol, and not "http" or "https". 
       Also, the "instanceUrl" inside the SFDX authorization URL doesn't include the protocol ("https://").
     required: true
+  client-id:
+    description: ''
+  jwt-secret-key:
+    description: ''
+  username:
+    description: ''
   set-default-dev-hub:
     description: Set the authenticated org as the default Dev Hub.
     required: false
@@ -16,7 +22,7 @@ inputs:
   set-default:
     description: Set the authenticated org as the default that all org-related commands run against.
     required: false
-    default: 'false'
+    default: 'true'
   alias:
     description: Alias for the org.
     required: false
@@ -24,12 +30,10 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Login
+    - name: Salesforce Org Login
       shell: bash
       run: |
-        args=(
-          --sfdx-url-file "authFile.json"
-        )
+        args=()
 
         if [[ "${{ inputs.set-default-dev-hub }}" == "true" ]]; then
           args+=(--set-default-dev-hub)
@@ -43,5 +47,12 @@ runs:
           args+=(--alias "${{ inputs.alias }}")
         fi
 
-        echo ${{ inputs.sfdx-url }} | base64 --decode | jq > authFile.json
-        sf org login sfdx-url "${args[@]}"
+        if [[ -n "${{ inputs.sfdx-url }}" ]];then
+          echo "Log in to a Salesforce org using a Salesforce DX authorization URL..."
+          echo ${{ inputs.sfdx-url }} | base64 --decode | jq > authFile.json
+          sf org login sfdx-url --sfdx-url-file "authFile.json" "${args[@]}"
+        else
+          echo "Log in to a Salesforce org using a JSON web token (JWT)..."
+          echo "${{ inputs.jwt-secret-key }}" > server.key
+          sf org login jwt --client-id ${{ inputs.client-id }} --jwt-key-file server.key --username ${{ inputs.username }} "${args[@]}"
+        fi
