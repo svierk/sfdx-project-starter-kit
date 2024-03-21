@@ -48,11 +48,11 @@ runs:
         fi
 
         if [[ -n "${{ inputs.sfdx-url }}" ]];then
-          echo "Log in to a Salesforce org using a Salesforce DX authorization URL..."
+          echo "Log in to Salesforce org using Salesforce DX authorization URL..."
           echo ${{ inputs.sfdx-url }} | base64 --decode | jq > authFile.json
           sf org login sfdx-url --sfdx-url-file "authFile.json" "${args[@]}"
         else
-          echo "Log in to a Salesforce org using a JSON web token (JWT)..."
+          echo "Log in to Salesforce org using JSON web token (JWT)..."
           echo "${{ inputs.jwt-secret-key }}" > server.key
           sf org login jwt --client-id ${{ inputs.client-id }} --jwt-key-file server.key --username ${{ inputs.username }} "${args[@]}"
         fi
