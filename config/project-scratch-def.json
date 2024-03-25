@@ -1,13 +1,19 @@
 {
-  "orgName": "svierk company",
-  "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
+  "orgName": "sample company",
+  "edition": "Enterprise",
+  "features": ["Communities", "PersonAccounts", "ServiceCloud"],
   "settings": {
-    "lightningExperienceSettings": {
-      "enableS1DesktopEnabled": true
+    "chatterSettings": {
+      "enableChatter": true
     },
-    "mobileSettings": {
-      "enableS1EncryptedStoragePref2": false
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
     }
   }
 }
