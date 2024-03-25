@@ -28,6 +28,10 @@ on:
         description: Packages to be installed
         type: string
         default: "['04t6S000001UjutQAC']" # Install Marketing Cloud package
+      push-data:
+        description: Should Test Data be pushed?
+        type: boolean
+        default: true
 
 jobs:
   create-scratch-org:
@@ -73,5 +77,17 @@ jobs:
       - name: Deploy Metadata
         if: ${{ inputs.deploy-metadata }}
         run: sf project deploy start
+      - name: Import CSV Data
+        if: ${{ inputs.push-data }}
+        uses: svierk/sfdx-data-import@main
+        with:
+          file-path: './data/accounts.csv'
+          object-type: 'Account'
+          external-id: 'Id'
+      - name: Import JSON Data
+        if: ${{ inputs.push-data }}
+        uses: svierk/sfdx-data-import@main
+        with:
+          file-path: './data/accounts.json,./data/contacts.json'
       - name: Generate Password
         run: sf org generate password --target-org scratch-${{ github.run_id }}
