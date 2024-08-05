@@ -22,8 +22,8 @@
     "test:unit:coverage": "sfdx-lwc-jest --coverage --skipApiVersionCheck",
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\" --check",
     "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
-    "postinstall": "husky install",
     "precommit": "lint-staged",
+    "prepare": "husky",
     "server:lwc": "sf force lightning lwc start"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "@salesforce/eslint-plugin-aura": "^2.1.0",
     "@salesforce/eslint-plugin-lightning": "^1.0.0",
     "@salesforce/sfdx-lwc-jest": "^5.1.0",
-    "eslint": "^9.8.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-compat": "^6.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^28.6.0",
