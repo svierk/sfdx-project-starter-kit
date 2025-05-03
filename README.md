@@ -59,7 +59,7 @@ npm run prettier
 
 ### Linter
 
-#### Linting LWC and Aura
+#### Linting LWC
 
 Run _ESLint_ to check for linting issues:
 
