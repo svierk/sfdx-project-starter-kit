@@ -95,21 +95,7 @@ npm run test:unit:coverage
 
 ## Local development
 
-### LWC development server
-
-Lightning Web Components can be developed locally without the need to push them to an org first. To set up local development you only need to authorize an org and install the development server.
-
-The local development server and its configuration are provided by a Salesforce CLI plugin that can be installed as follows:
-
-```
-sf plugins install @salesforce/lwc-dev-server
-```
-
-To start the server on http://localhost:3333 and access all components of the project run:
-
-```
-npm run server:lwc
-```
+Local Dev for Lightning Web Components lets you create and modify components leveraging a real-time browser preview: [Preview Components with Local Dev](https://developer.salesforce.com/docs/platform/lwc/guide/get-started-test-components.html)
 
 ## Debugging
 
@@ -117,7 +103,6 @@ To debug and troubleshoot Lightning Web Components, in addition to enabling [Deb
 
 - Enable custom formatters under Settings --> Preferences
 - User the Ignore List to ignore framework code while troubleshooting. Add the following two patterns under Settings --> Ignore List:
-
   - `/aura_prod.*.js$`
   - `/components/.*.js$`
 
