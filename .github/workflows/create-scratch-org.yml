@@ -1,4 +1,4 @@
-name: create-scratch-org
+name: Create Scratch Org
 
 on:
   workflow_dispatch:
