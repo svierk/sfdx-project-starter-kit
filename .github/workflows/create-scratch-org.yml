@@ -46,6 +46,8 @@ jobs:
         uses: svierk/get-node-version@main
       - name: Install SF CLI
         uses: svierk/sfdx-cli-setup@main
+        with:
+          version: 2.142.5
       - name: Authorize DevHub
         uses: svierk/sfdx-login@main
         with:
