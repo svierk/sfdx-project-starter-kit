@@ -1,5 +1,10 @@
 name: Validation
 
+# Validates changes to this repository: runs the static quality gate (Prettier,
+# ESLint, LWC tests) and, wherever secrets are available, deploys the metadata to
+# the target org, runs the Apex and LWC tests against it and publishes the
+# results to SonarCloud and Codecov.
+
 on:
   push:
     branches: [main]
@@ -7,45 +12,97 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Least-privilege token: this workflow only reads the repository.
+permissions:
+  contents: read
+
 jobs:
-  validation:
-    name: Validation
+  # External pull requests from forks have no access to secrets, so they run a
+  # secret-free, static-only pipeline. This job runs *only* in that context.
+  static:
+    name: Static Checks # keep in sync with the required status checks of the `main` ruleset
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v7.0.1
         with:
-          fetch-depth: 0
+          persist-credentials: false # the GITHUB_TOKEN is not needed after the checkout - don't leave it in .git/config
+
       - name: Select Node Version
-        uses: svierk/get-node-version@main
+        uses: svierk/get-node-version@v1.5.1
+
       - name: Install Dependencies
-        run: npm install --ignore-scripts
+        run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
+
       - name: Check Prettier
         run: npm run prettier
+
       - name: Check ESLint
-        run: npm run lint:sonar
+        run: npm run lint # plain report: no Sonar analysis runs in this job
+
+      # LWC tests run via sfdx-lwc-jest and need neither the SF CLI nor an org.
+      - name: Run Tests
+        uses: svierk/sfdx-run-tests@v1.1.0
+        with:
+          apex: false # requires an org login, which forks cannot do
+          lwc: true
+          flow: false
+
+  # Pushes, manual runs and internal pull requests (including Dependabot) have
+  # access to secrets and run the full validation. This job runs in every
+  # context except pull requests from forks.
+  validation:
+    name: Org Validation # keep in sync with the required status checks of the `main` ruleset
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0 # required for the Sonar analysis
+          persist-credentials: false # the GITHUB_TOKEN is not needed after the checkout - don't leave it in .git/config
+
+      - name: Select Node Version
+        uses: svierk/get-node-version@v1.5.1
+
+      - name: Install Dependencies
+        run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
+
+      - name: Check Prettier
+        run: npm run prettier
+
+      - name: Check ESLint
+        run: npm run lint:sonar # writes eslint-report.json, picked up by the Sonar scan below
+
       - name: Install SF CLI
-        uses: svierk/sfdx-cli-setup@main
+        uses: svierk/sfdx-cli-setup@v1.1.2
+
       - name: Salesforce Org Login
-        uses: svierk/sfdx-login@main
+        uses: svierk/sfdx-login@v1.4.2
         with:
           client-id: ${{ secrets.SFDX_CONSUMER_KEY }}
           jwt-secret-key: ${{ secrets.SFDX_JWT_SECRET_KEY }}
           username: ${{ vars.SFDX_USERNAME }}
+
       - name: Deploy Metadata
-        uses: svierk/sfdx-deploy@main
+        uses: svierk/sfdx-deploy@v1.2.1
+
       - name: Run Tests
-        uses: svierk/sfdx-run-tests@main
+        uses: svierk/sfdx-run-tests@v1.1.0
         with:
           apex: true
           lwc: true
           flow: false # enable once Flow tests exist in the project
+
+      # No GITHUB_TOKEN here: pull request decoration is done by the SonarCloud
+      # GitHub App, the scanner itself only needs SONAR_TOKEN.
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@master
+        uses: SonarSource/sonarqube-scan-action@v8.2.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Codecov Coverage Upload
-        uses: codecov/codecov-action@main
+        uses: codecov/codecov-action@v7.0.0
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
