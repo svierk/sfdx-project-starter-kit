@@ -30,7 +30,7 @@ jobs:
           persist-credentials: false # the GITHUB_TOKEN is not needed after the checkout - don't leave it in .git/config
 
       - name: Select Node Version
-        uses: svierk/get-node-version@v1.5.1
+        uses: svierk/get-node-version@v1.5.2
 
       - name: Install Dependencies
         run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
@@ -43,7 +43,7 @@ jobs:
 
       # LWC tests run via sfdx-lwc-jest and need neither the SF CLI nor an org.
       - name: Run Tests
-        uses: svierk/sfdx-run-tests@v1.1.0
+        uses: svierk/sfdx-run-tests@v1.1.1
         with:
           apex: false # requires an org login, which forks cannot do
           lwc: true
@@ -64,7 +64,7 @@ jobs:
           persist-credentials: false # the GITHUB_TOKEN is not needed after the checkout - don't leave it in .git/config
 
       - name: Select Node Version
-        uses: svierk/get-node-version@v1.5.1
+        uses: svierk/get-node-version@v1.5.2
 
       - name: Install Dependencies
         run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
@@ -76,20 +76,20 @@ jobs:
         run: npm run lint:sonar # writes eslint-report.json, picked up by the Sonar scan below
 
       - name: Install SF CLI
-        uses: svierk/sfdx-cli-setup@v1.1.2
+        uses: svierk/sfdx-cli-setup@v1.1.3
 
       - name: Salesforce Org Login
-        uses: svierk/sfdx-login@v1.4.2
+        uses: svierk/sfdx-login@v1.4.3
         with:
           client-id: ${{ secrets.SFDX_CONSUMER_KEY }}
           jwt-secret-key: ${{ secrets.SFDX_JWT_SECRET_KEY }}
           username: ${{ vars.SFDX_USERNAME }}
 
       - name: Deploy Metadata
-        uses: svierk/sfdx-deploy@v1.2.1
+        uses: svierk/sfdx-deploy@v1.2.2
 
       - name: Run Tests
-        uses: svierk/sfdx-run-tests@v1.1.0
+        uses: svierk/sfdx-run-tests@v1.1.1
         with:
           apex: true
           lwc: true
