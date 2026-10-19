@@ -98,7 +98,7 @@ jobs:
       # No GITHUB_TOKEN here: pull request decoration is done by the SonarCloud
       # GitHub App, the scanner itself only needs SONAR_TOKEN.
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v8.2.2
+        uses: SonarSource/sonarqube-scan-action@v8.3.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
