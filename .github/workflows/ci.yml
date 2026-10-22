@@ -35,11 +35,15 @@ jobs:
       - name: Install Dependencies
         run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
 
-      - name: Check Prettier
-        run: npm run prettier
-
-      - name: Check ESLint
-        run: npm run lint # plain report: no Sonar analysis runs in this job
+      # The Code Analyzer needs the SF CLI, which this secret-free job does not install.
+      - name: Code Review
+        uses: svierk/sfdx-code-review@v1.1.0
+        with:
+          code-analyzer: false
+          prettier: true
+          prettier-command: npm run prettier:verify # read-only check, scoped like the project's Prettier script
+          eslint: true
+          eslint-command: npm run lint:sonar # the report only feeds the job summary here, no Sonar scan runs in this job
 
       # LWC tests run via sfdx-lwc-jest and need neither the SF CLI nor an org.
       - name: Run Tests
@@ -69,14 +73,22 @@ jobs:
       - name: Install Dependencies
         run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
 
-      - name: Check Prettier
-        run: npm run prettier
-
-      - name: Check ESLint
-        run: npm run lint:sonar # writes eslint-report.json, picked up by the Sonar scan below
-
       - name: Install SF CLI
         uses: svierk/sfdx-cli-setup@v1.1.3
+
+      # Runs after the SF CLI setup, which the Code Analyzer needs. Its ESLint engine
+      # is disabled in code-analyzer.yml - ESLint runs with the project config via eslint-command.
+      - name: Code Review
+        uses: svierk/sfdx-code-review@v1.1.0
+        with:
+          code-analyzer: true
+          workspace: force-app
+          config-file: code-analyzer.yml
+          severity-threshold: 3 # fail on Moderate violations or worse
+          prettier: true
+          prettier-command: npm run prettier:verify # read-only check, scoped like the project's Prettier script
+          eslint: true
+          eslint-command: npm run lint:sonar # writes eslint-report.json, picked up by the Sonar scan below
 
       - name: Salesforce Org Login
         uses: svierk/sfdx-login@v1.4.3

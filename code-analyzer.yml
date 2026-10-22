@@ -1,0 +1,9 @@
+# Configuration of the Salesforce Code Analyzer, used by the Code Review step of
+# the CI workflow and by `sf code-analyzer run` locally.
+# More information: https://developer.salesforce.com/docs/platform/salesforce-code-analyzer/guide/config-custom.html
+
+engines:
+  # ESLint already runs on its own with the project's eslint.config.js (npm run lint)
+  # - don't lint the LWC code a second time with the analyzer's base config.
+  eslint:
+    disable_engine: true
