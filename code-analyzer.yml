@@ -4,6 +4,20 @@
 
 engines:
   # ESLint already runs on its own with the project's eslint.config.js (npm run lint)
-  # - don't lint the LWC code a second time with the analyzer's base config.
+  # - don't lint the LWC code a second time with the analyzer's base configs. Only
+  # the SLDS base config stays on: it checks the component styles and markup for
+  # SLDS 2, which the project's ESLint does not.
   eslint:
-    disable_engine: true
+    disable_javascript_base_config: true
+    disable_lwc_base_config: true
+    disable_typescript_base_config: true
+    disable_react_base_config: true
+
+rules:
+  eslint:
+    # Retired SLDS classes (e.g. `slds-icon--small`) are Low by default, below
+    # the severity threshold of the Code Review step. Raised to Moderate, they
+    # fail the build like the retired SLDS 1 design tokens. Hard-coded values
+    # that have a styling hook stay Low: reported, without failing the build.
+    '@salesforce-ux/slds/enforce-bem-usage':
+      severity: Moderate
