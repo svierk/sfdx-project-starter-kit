@@ -30,14 +30,14 @@ jobs:
           persist-credentials: false # the GITHUB_TOKEN is not needed after the checkout - don't leave it in .git/config
 
       - name: Select Node Version
-        uses: svierk/get-node-version@v1.5.2
+        uses: svierk/get-node-version@v1.6.0
 
       - name: Install Dependencies
         run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
 
       # The Code Analyzer needs the SF CLI, which this secret-free job does not install.
       - name: Code Review
-        uses: svierk/sfdx-code-review@v1.1.0
+        uses: svierk/sfdx-code-review@v1.1.1
         with:
           code-analyzer: false
           prettier: true
@@ -47,7 +47,7 @@ jobs:
 
       # LWC tests run via sfdx-lwc-jest and need neither the SF CLI nor an org.
       - name: Run Tests
-        uses: svierk/sfdx-run-tests@v1.1.1
+        uses: svierk/sfdx-run-tests@v1.2.0
         with:
           apex: false # requires an org login, which forks cannot do
           lwc: true
@@ -68,19 +68,19 @@ jobs:
           persist-credentials: false # the GITHUB_TOKEN is not needed after the checkout - don't leave it in .git/config
 
       - name: Select Node Version
-        uses: svierk/get-node-version@v1.5.2
+        uses: svierk/get-node-version@v1.6.0
 
       - name: Install Dependencies
         run: npm ci --ignore-scripts # install exactly what package-lock.json pins, without running lifecycle scripts
 
       - name: Install SF CLI
-        uses: svierk/sfdx-cli-setup@v1.1.3
+        uses: svierk/sfdx-cli-setup@v1.2.0
 
       # Runs after the SF CLI setup, which the Code Analyzer needs. Its ESLint engine
       # only runs the SLDS rules (see code-analyzer.yml) - ESLint runs with the project
       # config via eslint-command.
       - name: Code Review
-        uses: svierk/sfdx-code-review@v1.1.0
+        uses: svierk/sfdx-code-review@v1.1.1
         with:
           code-analyzer: true
           workspace: force-app
@@ -99,10 +99,10 @@ jobs:
           username: ${{ vars.SFDX_USERNAME }}
 
       - name: Deploy Metadata
-        uses: svierk/sfdx-deploy@v1.2.2
+        uses: svierk/sfdx-deploy@v1.3.0
 
       - name: Run Tests
-        uses: svierk/sfdx-run-tests@v1.1.1
+        uses: svierk/sfdx-run-tests@v1.2.0
         with:
           apex: true
           lwc: true
