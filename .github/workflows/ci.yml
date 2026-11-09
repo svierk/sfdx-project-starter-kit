@@ -47,7 +47,7 @@ jobs:
 
       # LWC tests run via sfdx-lwc-jest and need neither the SF CLI nor an org.
       - name: Run Tests
-        uses: svierk/sfdx-run-tests@v1.3.0
+        uses: svierk/sfdx-run-tests@v1.4.0
         with:
           apex: false # requires an org login, which forks cannot do
           lwc: true
@@ -102,13 +102,13 @@ jobs:
       # run against the code of the pull request. The test step below only sees
       # what's in the org, which on a pull request is the state of main.
       - name: Deploy Metadata
-        uses: svierk/sfdx-deploy@v1.3.1
+        uses: svierk/sfdx-deploy@v1.4.2
         with:
           dry-run: ${{ github.event_name == 'pull_request' }}
           test-level: ${{ github.event_name == 'pull_request' && 'RunLocalTests' || '' }}
 
       - name: Run Tests
-        uses: svierk/sfdx-run-tests@v1.3.0
+        uses: svierk/sfdx-run-tests@v1.4.0
         with:
           apex: true
           lwc: true
@@ -117,7 +117,7 @@ jobs:
       # No GITHUB_TOKEN here: pull request decoration is done by the SonarCloud
       # GitHub App, the scanner itself only needs SONAR_TOKEN.
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v8.4.0
+        uses: SonarSource/sonarqube-scan-action@v8.4.1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
